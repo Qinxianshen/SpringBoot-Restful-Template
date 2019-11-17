@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qin.springbootdemo.dao.RegisteredMapper" >
+
+
+
+    <insert id="registedUser" parameterType="com.qin.springbootdemo.domain.User" useGeneratedKeys="true" keyProperty="userId">
+            INSERT INTO nokia_user(user_name,password,enabled,locked) VALUES(#{username},#{password},1,0);
+    </insert>
+
+    <insert id="insertUserRole" parameterType="java.lang.Integer">
+        INSERT INTO nokia_user_role_relation(user_id,role_id) VALUES(#{userId},3);
+    </insert>
+
+    <insert id="registedAdmin" parameterType="com.qin.springbootdemo.domain.User" useGeneratedKeys="true" keyProperty="userId">
+            INSERT INTO nokia_user(user_name,password,enabled,locked) VALUES(#{username},#{password},1,0);
+    </insert>
+
+    <insert id="insertAdminRole" parameterType="java.lang.Integer">
+        INSERT INTO nokia_user_role_relation(user_id,role_id) VALUES(#{userId},2);
+    </insert>
+
+</mapper>

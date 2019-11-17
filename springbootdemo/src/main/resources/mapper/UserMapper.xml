@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qin.springbootdemo.dao.UserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.qin.springbootdemo.domain.User" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_name" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="enabled" property="enabled" jdbcType="TINYINT" />
+        <result column="locked" property="locked" jdbcType="TINYINT" />
+
+    </resultMap>
+
+    <resultMap id="RoleResultMap" type="com.qin.springbootdemo.domain.Role" >
+        <id column="role_id" property="role_id" jdbcType="INTEGER" />
+        <result column="role_name" property="role_name" jdbcType="VARCHAR" />
+        <result column="nameZh" property="nameZh" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <select id="loadUserByUsername" resultMap="BaseResultMap">
+            SELECT * from nokia_user  where user_name=#{username};
+    </select>
+
+    <select id="getUserRolesByUid" resultMap="RoleResultMap">
+       SELECT r.role_id,r.role_name,r.nameZh FROM nokia_role r,nokia_user_role_relation ur WHERE r.role_id = ur.role_id AND ur.user_id = #{id};
+    </select>
+</mapper>
